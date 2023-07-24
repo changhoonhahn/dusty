@@ -42,7 +42,7 @@ prior = Infer.load_priors([
     Infer.UniformPrior(0., 1., label='sed'), # burst fraction
     Infer.UniformPrior(1e-2, 13.27, label='sed'), # tburst
     Infer.LogUniformPrior(4.5e-5, 1.5e-2, label='sed'), # log uniform priors on ZH coeff
-    Infer.LogUniformPrior(4.5e-5, 1.5e-2, label='sed') # log uniform priors on ZH coeff
+    Infer.LogUniformPrior(4.5e-5, 1.5e-2, label='sed'), # log uniform priors on ZH coeff
     Infer.UniformPrior(0.01, 0.2, label='sed')   # uniform priors on photoz 
 ])
 
@@ -89,7 +89,7 @@ def log_post(theta, *args, **kwargs):
 
 
 # initialize walkers 
-nwalkers = 27 
+nwalkers = 30 
 ndim = 9  
 
 _lnpost = lambda tt: -2. * log_post(tt, maggies[ised], np.ones(maggies.shape[1]), filters=filters) 
@@ -121,5 +121,12 @@ zeus_sampler = zeus.EnsembleSampler(
 
 zeus_sampler.run_mcmc(p0, 1000, progress=True)
 
-np.save('/scratch/gpfs/chhahn/dusty/mcmc.noz.nodust.%i.%i.npy' % (igal, iang), 
+if os.path.isdir('/scratch/gpfs/chhahn/dusty/'): 
+    dat_dir = '/scratch/gpfs/chhahn/dusty/'
+elif os.path.isdir('/scratch/network/chhahn/dusty/'): 
+    dat_dir = '/scratch/network/chhahn/dusty/'
+else: 
+    dat_dir = '/Users/chahah/data/dusty/'
+
+np.save(os.path.join(dat_dir, '/mcmc/mcmc.noz.nodust.%i.%i.npy' % (igal, iang)), 
         zeus_sampler.get_chain())

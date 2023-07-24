@@ -123,5 +123,12 @@ zeus_sampler = zeus.EnsembleSampler(
 
 zeus_sampler.run_mcmc(p0, 1000, progress=True)
 
-np.save('/scratch/gpfs/chhahn/dusty/mcmc.noz.%i.%i.npy' % (igal, iang), 
+if os.path.isdir('/scratch/gpfs/chhahn/dusty/'): 
+    dat_dir = '/scratch/gpfs/chhahn/dusty/'
+elif os.path.isdir('/scratch/network/chhahn/dusty/'): 
+    dat_dir = '/scratch/network/chhahn/dusty/'
+else: 
+    dat_dir = '/Users/chahah/data/dusty/'
+
+np.save(os.path.join(dat_dir, '/mcmc/mcmc.noz.%i.%i.npy' % (igal, iang)), 
         zeus_sampler.get_chain())
