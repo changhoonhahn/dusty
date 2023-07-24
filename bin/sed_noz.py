@@ -121,7 +121,7 @@ zeus_sampler = zeus.EnsembleSampler(
         args=(maggies[ised], np.ones(maggies.shape[1])), 
         kwargs={'filters': filters})
 
-zeus_sampler.run_mcmc(p0, 2000, progress=True)
+zeus_sampler.run_mcmc(p0, 1000, progress=True)
 
 np.save('/scratch/gpfs/chhahn/dusty/mcmc.noz.%i.%i.npy' % (igal, iang), 
         zeus_sampler.get_chain())

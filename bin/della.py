@@ -145,5 +145,5 @@ def sed_noz_nodust(igal, iang):
 for igal in [60]: 
     #sed(igal, 0)
     #sed_nodust(igal, 0)
-    sed_noz(igal, 0)
-    sed_noz_nodust(igal 0)
+    #sed_noz(igal, 0)
+    #sed_noz_nodust(igal, 0)
