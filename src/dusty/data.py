@@ -9,6 +9,8 @@ from astropy.table import Table
 
 if os.path.isdir('/scratch/gpfs/chhahn/dusty/'): 
     dat_dir = '/scratch/gpfs/chhahn/dusty/'
+elif os.path.isdir('/scratch/network/chhahn/dusty/'): 
+    dat_dir = '/scratch/network/chhahn/dusty/'
 else: 
     dat_dir = '/Users/chahah/data/dusty/'
 
