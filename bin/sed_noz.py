@@ -91,7 +91,7 @@ def log_post(theta, *args, **kwargs):
 
 
 # initialize walkers 
-nwalkers = 36 
+nwalkers = 30 
 ndim = 12
 
 _lnpost = lambda tt: -2. * log_post(tt, maggies[ised], np.ones(maggies.shape[1]), filters=filters) 
