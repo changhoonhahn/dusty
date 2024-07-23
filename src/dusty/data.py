@@ -72,23 +72,29 @@ class Nihao(object):
         '''
         if filters is None: filters = U.ugrizJ()
 
+        if dust: 
+            _seds = self.seds
+            print('blah') 
+        else: 
+            _seds = self.seds_unatten
+
         if isinstance(zred, float): 
             # redshift the wavelength 
             wavez = self.wave * (1+zred)
 
-            fl = self.seds / (3.34e4) / wavez**2 # ergs/s/cm^2/A
+            fl = _seds / (3.34e4) / wavez**2 # ergs/s/cm^2/A
 
             maggies = np.array([np.array(list(arr)) 
                                 for arr in filters.get_ab_maggies(fl, wavelength=wavez).as_array()]) * 1e9
         else: 
-            assert zred.shape[0] == (self.seds).shape[0], 'provide the same number of redshifts as galaxies'
+            assert zred.shape[0] == (_seds).shape[0], 'provide the same number of redshifts as galaxies'
         
             maggies = np.empty((zred.shape[0], len(filters.effective_wavelengths)))
             for i, zz in enumerate(zred): 
                 # redshift the wavelength 
                 wavez = self.wave * (1+zz)
 
-                fl = self.seds[i] / (3.34e4) / wavez**2 # ergs/s/cm^2/A
+                fl = _seds[i] / (3.34e4) / wavez**2 # ergs/s/cm^2/A
 
                 maggies[i,:] = np.array([np.array(list(arr)) 
                                     for arr in filters.get_ab_maggies(fl, wavelength=wavez).as_array()]) * 1e9
