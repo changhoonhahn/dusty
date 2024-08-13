@@ -6,7 +6,6 @@ import astropy.units as u
 from astropy.io import fits
 from astropy.table import Table
 
-
 from . import util as U
 
 
@@ -16,7 +15,6 @@ elif os.path.isdir('/scratch/network/chhahn/dusty/'):
     dat_dir = '/scratch/network/chhahn/dusty/'
 else: 
     dat_dir = '/Users/chahah/data/dusty/'
-
 
 
 class Nihao(object): 
@@ -72,11 +70,8 @@ class Nihao(object):
         '''
         if filters is None: filters = U.ugrizJ()
 
-        if dust: 
-            _seds = self.seds
-            print('blah') 
-        else: 
-            _seds = self.seds_unatten
+        if dust: _seds = self.seds
+        else: _seds = self.seds_unatten
 
         if isinstance(zred, float): 
             # redshift the wavelength 
@@ -102,7 +97,7 @@ class Nihao(object):
         return maggies 
 
 
-'''
+"""
     def nihao(filters, dust=False): 
         '''
         '''
@@ -127,4 +122,4 @@ class Nihao(object):
         for arr in filters.get_ab_maggies(fl, wavelength=wave).as_array()]) * 1e9
 
         return gals, maggies 
-'''
+"""

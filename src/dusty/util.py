@@ -2,6 +2,10 @@
 '''
 from speclite import filters as specFilter
 
+def lsst(): 
+    # lsst filters
+    return specFilter.load_filters('lsst2023-*')
+
 
 def ugrizJ(): 
     # set up photometric filters u, g, r, i, z, J
